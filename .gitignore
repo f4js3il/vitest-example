@@ -46,3 +46,4 @@ Thumbs.db
 /.editorconfig
 
 /.vscode
+/.vitest
