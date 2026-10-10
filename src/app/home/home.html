@@ -1,0 +1,33 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-lg space-y-6 rounded-lg bg-white p-8 shadow-md">
+    <h2 class="text-center text-2xl font-semibold text-gray-800">Random quote</h2>
+
+    @if (quote.isLoading()) {
+      <p class="text-center text-gray-500">Loading...</p>
+    } @else if (quote.error()) {
+      <p class="text-center text-red-600">Could not load a quote. Please try again.</p>
+    } @else if (quote.hasValue()) {
+      <blockquote class="space-y-3">
+        <p class="text-lg italic text-gray-800">“{{ quote.value().quote }}”</p>
+        <footer class="text-right text-sm text-gray-600">— {{ quote.value().author }}</footer>
+      </blockquote>
+    }
+
+    <div class="flex gap-3">
+      <button
+        type="button"
+        class="flex-1 rounded-md bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+        [disabled]="quote.isLoading()"
+        (click)="quote.reload()"
+      >
+        New quote
+      </button>
+      <a
+        routerLink="/login"
+        class="flex-1 rounded-md border border-gray-300 py-2 text-center font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Log out
+      </a>
+    </div>
+  </div>
+</div>

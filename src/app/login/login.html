@@ -1,0 +1,48 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+  <form
+    class="w-full max-w-sm space-y-5 rounded-lg bg-white p-8 shadow-md"
+    novalidate
+    (submit)="onSubmit($event)"
+  >
+    <h2 class="text-center text-2xl font-semibold text-gray-800">Sign in</h2>
+
+    <div class="space-y-1">
+      <label for="userId" class="block text-sm font-medium text-gray-700">User ID</label>
+      <input
+        id="userId"
+        type="text"
+        autocomplete="username"
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        [formField]="loginForm.userId"
+      />
+      @if (loginForm.userId().touched() && loginForm.userId().invalid()) {
+        @for (error of loginForm.userId().errors(); track error.kind) {
+          <p class="text-sm text-red-600">{{ error.message }}</p>
+        }
+      }
+    </div>
+
+    <div class="space-y-1">
+      <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        [formField]="loginForm.password"
+      />
+      @if (loginForm.password().touched() && loginForm.password().invalid()) {
+        @for (error of loginForm.password().errors(); track error.kind) {
+          <p class="text-sm text-red-600">{{ error.message }}</p>
+        }
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="w-full rounded-md bg-blue-600 py-2 font-medium text-white hover:bg-blue-700"
+    >
+      Log in
+    </button>
+  </form>
+</div>
